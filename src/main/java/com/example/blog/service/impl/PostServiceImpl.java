@@ -33,4 +33,42 @@ public class PostServiceImpl implements PostService {
         Post post = PostMapper.mapToPost(postDto);
         postRepository.save(post);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PostDto findPostById(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new RuntimeException("Post not found"));
+
+        return PostMapper.mapToPostDto(post);
+    }
+
+    @Override
+    @Transactional
+    public void updatePost(PostDto postDto) {
+        postRepository.save(PostMapper.mapToPost(postDto));
+    }
+
+    @Override
+    @Transactional
+    public void deletePost(Long postId) {
+        postRepository.deleteById(postId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PostDto findPostByUrl(String postUrl) {
+        Post post = postRepository.findByUrl(postUrl)
+                .orElseThrow(() -> new RuntimeException("Post not found"));
+
+        return PostMapper.mapToPostDto(post);
+    }
+
+    @Override
+    public List<PostDto> searchPosts(String query) {
+        return postRepository.searchPosts(query)
+                .stream()
+                .map(PostMapper::mapToPostDto)
+                .collect(Collectors.toList());
+    }
 }

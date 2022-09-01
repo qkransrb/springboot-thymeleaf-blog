@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="/admin/fragments/header :: header"></div>
+<body>
+  <div th:replace="/admin/fragments/header :: navbar"></div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 py-4">
+        <h2 th:text="${post.title}">Post Title</h2>
+        <hr />
+        <h4 th:text="${post.shortDescription}">Post Short Description</h4>
+        <hr />
+        <div th:utext="${post.content}" class="pb-4"></div>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="/admin/fragments/footer :: footer"></div>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <body>
     <div th:replace="admin/fragments/header :: navbar"></div>
     <div class="container">
-        <div class="row col-md-8 offset-md-2 pt-4">
+        <div class="row col-md-8 offset-md-2 py-4">
             <div class="card">
                 <div class="card-header">
                     <h2 class="text-center">Create Post</h2>
@@ -22,8 +22,8 @@
                             <p th:if="${#fields.hasErrors('shortDescription')}" class="text-danger" th:errors="*{shortDescription}"></p>
                         </div>
                         <div class="mb-3">
-                            <label for="content" class="form-label">Content</label>
-                            <textarea name="content" id="content" placeholder="Enter post content" class="form-control" rows="12" th:field="*{content}"></textarea>
+                            <label for="editor" class="form-label">Content</label>
+                            <textarea name="content" id="editor" placeholder="Enter post content" class="form-control" rows="12" th:field="*{content}"></textarea>
                             <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -33,5 +33,20 @@
         </div>
     </div>
     <div th:replace="admin/fragments/footer :: footer"></div>
+    <!--jQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <!--CKEditor-->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .then( editor => {
+                console.log( editor );
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 </body>
 </html>
